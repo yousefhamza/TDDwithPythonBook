@@ -34,18 +34,29 @@ class NewVisitorTest (unittest.TestCase):
 
 		table = self.browser.find_element_by_id('id_list_table')
 		rows = table.find_elements_by_tag_name('tr')
-		self.assertTrue(
-			any(row.text == '1: Buy peacock feather' for row in rows),
-			"New to-do item did not appear in table"
-		)
+		self.assertIn('1: Buy peacock feather', [row.text for row in rows])
 
 		#There's stil a box to enter another item
-		self.fail('Finish the test!')
+		inputbox = self.browser.find_element_by_id('id_new_item')
+		self.assertEqual(
+			inputbox.get_attribute('placeholder'),
+			'Enter a to-do item'
+		)
+
 		#User enter "Use peacock feather to make a fly"
+		inputbox.send_keys('Use peacock feather to make a fly')
+		inputbox.send_keys(Keys.ENTER)
 
 		#The page updates again showing both items
+		table = self.browser.find_element_by_id('id_list_table')
+		rows = table.find_elements_by_tag_name('tr')
+		self.assertIn(
+			'2: Use peacock feather to make a fly',
+			[row.text for row in rows]
+		)
 
 		#User sees a unique URL for his list
+		self.fail("Compete the FT!")
 
 		#User check that URL to find his to-do list
 
