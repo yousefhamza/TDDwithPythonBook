@@ -78,3 +78,14 @@ class NewVisitorTest (LiveServerTestCase):
 		new_user_url = self.browser.current_url
 		self.assertRegexpMatches(new_user_url, '/lists/.+')
 		self.assertNotEqual(new_user_url, user_list_url)
+
+	def test_layout_and_styling(self):
+		self.browser.get(self.live_server_url)
+		self.browser.set_window_size(1024, 768)
+
+		inputbox = self.browser.find_element_by_id('id_new_item')
+		self.assertAlmostEqual (
+			inputbox.location['x'] + inputbox.size['width'] / 2,
+			512,
+			delta=5
+		)
