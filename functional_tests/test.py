@@ -38,7 +38,7 @@ class NewVisitorTest (LiveServerTestCase):
 		inputbox.send_keys(Keys.ENTER)
 
 		user_list_url = self.browser.current_url
-		self.assertRegex(user_list_url, '/lists/.+')
+		self.assertRegexpMatches(user_list_url, '/lists/.+')
 		self.check_for_row_in_list_table('1: Buy peacock feather')
 
 		#There's stil a box to enter another item
@@ -67,16 +67,16 @@ class NewVisitorTest (LiveServerTestCase):
 		self.browser.get(self.live_server_url)
 		page_text = self.browser.find_element_by_tag_name('body').text
 		self.assertNotIn('Buy peacock feathers', page_text)
-		self.assertNoIn('make a fly', page_text)
+		self.assertNotIn('make a fly', page_text)
 
 		#New user starts a new list
-		inputbox = self.browser.get_element_by_id('id_new_item')
+		inputbox = self.browser.find_element_by_id('id_new_item')
 		inputbox.send_keys('Buy milk')
 		inputbox.send_keys(Keys.ENTER)
 
 		#New user gets a unique URL
-		new_user_url = self.browser.get_current_url
-		self.assertRegex(new_user_url, '/lists/.+')
+		new_user_url = self.browser.current_url
+		self.assertRegexpMatches(new_user_url, '/lists/.+')
 		self.assertNotEqual(new_user_url, user_list_url)
 
 		#User quits
