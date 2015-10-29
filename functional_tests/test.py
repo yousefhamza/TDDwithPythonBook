@@ -78,6 +78,3 @@ class NewVisitorTest (LiveServerTestCase):
 		new_user_url = self.browser.current_url
 		self.assertRegexpMatches(new_user_url, '/lists/.+')
 		self.assertNotEqual(new_user_url, user_list_url)
-
-		#User quits
-		browser.quit()
