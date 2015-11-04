@@ -49,4 +49,4 @@ def new_list(request):
 					'error': error
 				}
 			)
-	return redirect('/lists/%d/' % (list_.id,))
+	return redirect(list_)
