@@ -58,7 +58,7 @@ class ListViewTest(TestCase):
 		self.client.post(
 			'/lists/%d/' % (correct_list.id,),
 			data = {
-				'item_text': 'A new item for an existing list'
+				'text': 'A new item for an existing list'
 			}
 		)
 
@@ -74,7 +74,7 @@ class ListViewTest(TestCase):
 		response = self.client.post(
 			'/lists/%d/' % (correct_list.id,),
 			data = {
-				'item_text': 'A new item for an exisitng list'
+				'text': 'A new item for an exisitng list'
 			}
 		)
 		self.assertRedirects(response, '/lists/%d/' % (correct_list.id,))
@@ -83,7 +83,7 @@ class ListViewTest(TestCase):
 		response = self.client.post (
 				'/lists/%d/' % (list_.id,),
 				data =  {
-					'item_text': '',
+					'text': '',
 				}
 			)
 		self.assertEqual(response.status_code, 200)
